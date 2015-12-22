@@ -12,6 +12,8 @@ sugar-base-web-php:
 
 sugar-base-db:
   build: ../images/base/mysql5.7
+  volumes:
+    - ./mysql-conf.d:/etc/mysql/conf.d/
   ports:
     - "3366:3306"
 #  expose:

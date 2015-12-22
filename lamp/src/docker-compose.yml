@@ -10,6 +10,8 @@ web-php:
 
 db:
   build: ../images/base/mysql-ee6ac037ab647e0de9dbeb4e064610a95cb6df4a/5.7
+  volumes:
+    - ./mysql-conf.d:/etc/mysql/conf.d/
   ports:
     - "3366:3306"
 #  expose:
