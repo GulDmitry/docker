@@ -1,0 +1,23 @@
+web-php:
+# Requires php:5.6-apache image.
+  build: ../images/ext/php5.6-apache
+  ports:
+    - "8080:80"
+  volumes:
+    - ./www:/var/www/html
+  links:
+    - db
+
+db:
+  build: ../images/base/mysql-ee6ac037ab647e0de9dbeb4e064610a95cb6df4a/5.7
+  ports:
+    - "3366:3306"
+#  expose:
+#    - "3306"
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: testdb
+#    MYSQL_USER: test
+#    MYSQL_PASSWORD: test
+#  volumes:
+#    - /my/own/datadir:/var/lib/mysql
