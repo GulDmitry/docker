@@ -1,0 +1,5 @@
+nbproject
+.*
+!/.gitignore
+composer.lock
+vendor/bin
