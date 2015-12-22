@@ -21,3 +21,10 @@ db:
 #    MYSQL_PASSWORD: test
 #  volumes:
 #    - /my/own/datadir:/var/lib/mysql
+
+phpmyadmin:
+  build: ../images/base/phpmyadmin-master
+  ports:
+    - "8090:8080"
+  links:
+    - db

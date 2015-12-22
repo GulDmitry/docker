@@ -32,3 +32,10 @@ sugar-base-elasticsearch:
 #    Plugins might be installed manually or inherited from the base image:
 #    /usr/share/elasticsearch/bin/plugin -install mobz/elasticsearch-head # http://localhost:9300/_plugin/head/
 #    /usr/share/elasticsearch/bin/plugin -install royrusso/elasticsearch-HQ # http://localhost:9300/_plugin/HQ/
+
+phpmyadmin:
+  build: ../images/base/phpmyadmin-master
+  ports:
+    - "8090:8080"
+  links:
+    - sugar-base-db
