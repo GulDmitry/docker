@@ -47,10 +47,6 @@ RUN docker-php-ext-enable xhprof
 RUN docker-php-ext-enable xdebug
 
 RUN echo " \
-    xhprof.output_dir='/tmp/xhprof'\n\
-" > /usr/local/etc/php/conf.d/docker-xhprof.ini
-
-RUN echo " \
     ; For debug in CLI run before script {export XDEBUG_CONFIG='idekey=netbeans-xdebug'}.\n\
     ; PHP Storm IDE key is PHPSTORM\n\
     ; To run CLI debug via PHPStorm IDE setup a server (where host is private IP), match routes\n\
