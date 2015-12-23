@@ -12,6 +12,7 @@ db:
   build: ../images/base/mysql-ee6ac037ab647e0de9dbeb4e064610a95cb6df4a/5.7
   volumes:
     - ./mysql-conf.d:/etc/mysql/conf.d/
+#    - /my/own/datadir:/var/lib/mysql
   ports:
     - "3366:3306"
 #  expose:
@@ -21,8 +22,6 @@ db:
     MYSQL_DATABASE: testdb
 #    MYSQL_USER: test
 #    MYSQL_PASSWORD: test
-#  volumes:
-#    - /my/own/datadir:/var/lib/mysql
 
 phpmyadmin:
   build: ../images/base/phpmyadmin-master

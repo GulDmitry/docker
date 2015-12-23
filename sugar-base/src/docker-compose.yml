@@ -14,6 +14,7 @@ sugar-base-db:
   build: ../images/base/mysql5.7
   volumes:
     - ./mysql-conf.d:/etc/mysql/conf.d/
+#    - /my/own/datadir:/var/lib/mysql
   ports:
     - "3366:3306"
 #  expose:
@@ -23,8 +24,6 @@ sugar-base-db:
     MYSQL_DATABASE: sugarcrm
 #    MYSQL_USER: test
 #    MYSQL_PASSWORD: test
-#  volumes:
-#    - /my/own/datadir:/var/lib/mysql
 
 sugar-base-elasticsearch:
   build: ../images/base/elasticsearch1.5
