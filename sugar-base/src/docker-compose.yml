@@ -16,7 +16,7 @@ sugar-base-db:
     - ./mysql-conf.d:/etc/mysql/conf.d/
 #    - /my/own/datadir:/var/lib/mysql
   ports:
-    - "3366:3306"
+    - "127.0.10.2:3366:3306"
 #  expose:
 #    - "3306"
   environment:
@@ -28,7 +28,7 @@ sugar-base-db:
 sugar-base-elasticsearch:
   build: ../images/base/elasticsearch1.5
   ports:
-    - "9300:9200"
+    - "127.0.10.2:9300:9200"
   command: elasticsearch -Des.discovery.zen.ping.multicast.enabled=false -Des.cluster.name="elasticsearchtest" -Des.node.local=true -Des.index.store.type="memory" -Des.store.fs.memory.enabled=true -Des.gateway.type="none" -Des.gateway.type="none"
 #    Plugins might be installed manually or inherited from the base image:
 #    /usr/share/elasticsearch/bin/plugin -install mobz/elasticsearch-head # http://localhost:9300/_plugin/head/
@@ -37,6 +37,6 @@ sugar-base-elasticsearch:
 sugar-base-phpmyadmin:
   build: ../images/base/phpmyadmin-master
   ports:
-    - "8090:8080"
+    - "127.0.10.2:8090:8080"
   links:
     - sugar-base-db

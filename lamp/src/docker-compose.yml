@@ -5,6 +5,7 @@ web-php:
   ports:
 # Own IP or from hosts.
     - "127.0.10.2:8080:80"
+#    - "8080:80"
   volumes:
     - ./www:/var/www/html
   links:
@@ -16,7 +17,7 @@ db:
     - ./mysql-conf.d:/etc/mysql/conf.d/
 #    - /my/own/datadir:/var/lib/mysql
   ports:
-    - "3366:3306"
+    - "127.0.10.2:3366:3306"
 #  expose: # Without publishing to the host machine - only be accessible to linked services.
 #    - "3306"
   environment:
@@ -28,6 +29,6 @@ db:
 phpmyadmin:
   build: ../images/base/phpmyadmin-master
   ports:
-    - "8090:8080"
+    - "127.0.10.2:8090:8080"
   links:
     - db
