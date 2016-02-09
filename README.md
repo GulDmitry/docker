@@ -15,40 +15,40 @@ in the `lamp/images/base/php-<hash>/5.6/apache` directory.
 
 ## Tips
 Tuned Ubuntu image:
-sudo docker pull phusion/baseimage
+`sudo docker pull phusion/baseimage`
 
 Get containers IPs:
-docker inspect -f "{{ .NetworkSettings.IPAddress }}" hash or service names
+`docker inspect -f "{{ .NetworkSettings.IPAddress }}" hash or service names`
 
 SSH instead of 22 port forwarding:
-docker exec -it 580b9e371f71 bash
+`docker exec -it 580b9e371f71 bash`
 
 Run in the background:
-docker-compose up -d
-docker-compose logs
+`docker-compose up -d`
+`docker-compose logs`
 
 Build and remove previous builds
-docker build -t php:5.4-apache --force-rm=true . 
+`docker build -t php:5.4-apache --force-rm=true .`
 
 RM all <none> containers:
-docker rmi -f $(docker images | grep "^<none>" | awk "{print $3}")f
+`docker rmi -f $(docker images | grep "^<none>" | awk "{print $3}")f`
 
 To show all ENV variables run:
-docker-compose run db env
+`docker-compose run db env`
 , where the "db" is a docker-compose.yml service.
 
 To run the same services with a specific project name (by default dir name):
-docker-compose -f /var/www/docker/lamp/src/docker-compose.yml -p test up
+`docker-compose -f /var/www/docker/lamp/src/docker-compose.yml -p test up`
 
-docker-compose run web db -d
+`docker-compose run web db -d`
 
 Monitoring.
 http://www.weave.works/products/weave-scope/
 
 Inside a container if you get "Error opening terminal: unknown." error exec:
-export TERM=xterm
+`export TERM=xterm`
 
 Rebuild a service with overridden one:
-docker-compose -f docker-compose.yml -f docker-compose.fpm.yml build sugar-base-web-php
+`docker-compose -f docker-compose.yml -f docker-compose.fpm.yml build sugar-base-web-php`
 
 ##TODO:
