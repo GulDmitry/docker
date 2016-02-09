@@ -38,5 +38,7 @@ sugar-base-phpmyadmin:
   build: ../images/base/phpmyadmin-master
   ports:
     - "127.0.10.2:8090:8080"
+  environment:
+    - PMA_ARBITRARY=1
   links:
     - sugar-base-db

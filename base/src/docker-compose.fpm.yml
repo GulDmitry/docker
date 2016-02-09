@@ -1,0 +1,4 @@
+# docker-compose -f docker-compose.yml -f docker-compose.fpm.yml build web-php
+# docker-compose -f docker-compose.yml -f docker-compose.fpm.yml up
+web-php:
+  build: ../images/ext/php5.5-fpm
