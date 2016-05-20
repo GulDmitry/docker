@@ -1,15 +1,11 @@
 FROM php:7.0-fpm
 
 # Install modules
-#RUN apt-get update && apt-get install -y \
-#        libfreetype6-dev \
-#        libjpeg62-turbo-dev \
-#        libpng12-dev \
-#        php5-xdebug \
-#        php5-cli \
-#        php5-mysql \
-#        php5-curl \
-#    && docker-php-ext-install iconv mysqli pdo pdo_mysql
+RUN apt-get update && apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libmcrypt-dev \
+        libpng12-dev
 
 RUN docker-php-ext-install iconv mysqli pdo pdo_mysql
 
@@ -17,27 +13,26 @@ RUN docker-php-ext-install iconv mysqli pdo pdo_mysql
 RUN docker-php-ext-install bcmath
 
 # Install bz2
-RUN apt-get install -y libbz2-dev
-RUN docker-php-ext-install bz2 zip
+#RUN apt-get install -y libbz2-dev
+#RUN docker-php-ext-install zip
 
 # Install GD
-RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng12-dev
+#RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng12-dev
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
-RUN docker-php-ext-install gd
+RUN docker-php-ext-install -j$(nproc) gd
 
 # Install mbstring
 RUN docker-php-ext-install mbstring
 
 # Install mcrypt
-RUN apt-get install -y libmcrypt-dev
-RUN docker-php-ext-install mcrypt
+RUN docker-php-ext-install -j$(nproc) iconv mcrypt
 
 # Install imap
-RUN apt-get install -y openssl
-RUN apt-get install -y libc-client-dev
-RUN apt-get install -y libkrb5-dev
-RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
-RUN docker-php-ext-install imap
+#RUN apt-get install -y openssl
+#RUN apt-get install -y libc-client-dev
+#RUN apt-get install -y libkrb5-dev
+#RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+#RUN docker-php-ext-install imap
 
 # Install xhprof, xdebug
 RUN pecl install -o -f xdebug \

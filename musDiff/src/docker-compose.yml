@@ -1,9 +1,9 @@
-web-php:
-  build: ../images/ext/php:7.0-fpm
+musdiff-web-php:
+  build: ../images/ext/php7.0-fpm
   ports:
 # Own IP or from hosts.
-    - "127.0.10.3:8080:80"
-#    - "8080:80"
+#    - "127.0.10.3:8080:80"
+    - "8000:80"
   volumes:
     - /var/www/musDiff:/var/www/html
 #  links:
