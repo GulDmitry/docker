@@ -26,6 +26,9 @@ db:
 #    MYSQL_USER: test
 #    MYSQL_PASSWORD: test
 
+# To connect from UI use the command:
+# docker-compose ps - get containers
+# docker inspect -f "{{ .NetworkSettings.IPAddress }}" DB_CONTAINER_NAME - get the containers IP.
 phpmyadmin:
   build: ../images/base/phpmyadmin-master
   ports:
