@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$DIR/../../" # force phpstorm to sit in project's root dir when running tests
+# eval $(docker-machine env default)
+#if [[ "$(docker images -q php_bin)" == "" ]]; then
+#    docker build -t php_bin ${DIR}/../docker/php/
+#fi
+#docker run -i --rm -v "${PWD}":"${PWD}" -v /private/:/private/ -v /tmp/:/tmp/ -v /var/www/sugar-build-two/:/var/www/sugar-build-two/ -w ${PWD} --net=host --sig-proxy=true --pid=host php_bin php -d include_path=vendor/phpunit/phpunit "$@"
+# image name: docker images
+docker run -i --rm -v "${PWD}":"${PWD}" -v /private/:/private/ -v /tmp/:/tmp/ -v /var/www/sugar-build-two/:/var/www/sugar-build-two/ -w ${PWD} --net=host --sig-proxy=true --pid=host sugarbuildtwo_sugar-web-php php -d include_path=vendor/phpunit/phpunit "$@"
