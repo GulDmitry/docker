@@ -1,0 +1,13 @@
+{
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "": "/"
+    }
+  },
+  "require": {
+    "php": ">=5.6",
+    "symfony/security": "^3.1",
+    "symfony/ldap": "^3.1"
+  }
+}

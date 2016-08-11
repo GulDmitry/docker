@@ -5,9 +5,9 @@
 
 ## Getting Started
 * Install [Docker](https://docs.docker.com/engine/installation/) and [Docker Compose](https://docs.docker.com/compose/install/).
-* Go to /repository/openldap
+* Go to `.../repository/openldap`
 * Run `docker-compose up`
-  > *Note:* To avoid the  `ERROR: Couldn't connect to Docker daemon at http+docker://localunixsocket - is it running?` error 
+  * > *Note:* To avoid the  `ERROR: Couldn't connect to Docker daemon at http+docker://localunixsocket - is it running?` error 
   use the `-d` (background process) - `docker-compose up -d`.
 * To stop or remove containers made by `up` command run, in the `openldap` directory, `docker-compose stop` `docker-compose rm` commands respectively.
 
@@ -15,16 +15,16 @@
 * Docker:
   * `docker ps` - to show running containers.
   * `docker exec -t {openldap_container_id} ldapsearch -x -h localhost -b dc=openldap,dc=com -D "cn=admin,dc=openldap,dc=com" -w admin` - to search admin's data.
-* Raw PHP
-  * `php testConnection.php`
-* Symfony LDAP
-  *
+* PHP
+  * `php test/connect-raw.php` - raw PHP.
+  * `php test/connect-symfony.php` - Symfony. Run `php composer.phar install -d 'test'` first.
 
 ## phpLDAPAdmin
-* Go to http://localhost:8899
+* Go to [http://localhost:8899](http://localhost:8899)
 * Login(DN): `cn=admin,dc=openldap,dc=com`
 * Password: `admin`
-### Creating a new user
+
+#### Creating a new user
 * (optional) Create a new group by clicking `Create new entry here`.
 * Generic: Posix Group, enter a new for instance `users`.
 * Create a child entry

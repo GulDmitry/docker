@@ -24,8 +24,7 @@ $attributes = [
     'cn',
     'sn',
     'uid',
-    'postalAddress',
-    'telephoneNumber'
+    'description',
 ];
 
 // Search information about the user.
