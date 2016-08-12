@@ -41,3 +41,4 @@
 * Test `docker exec -t openldap ldapsearch -x -h localhost -b cn=test,ou=People,dc=openldap,dc=com -D "cn=test,ou=People,dc=openldap,dc=com" -w test`
 
 #TODO
+* Why the demo user cannot search in `ou=People,dc=openldap,dc=com` and `dc=openldap,dc=com` DN?
