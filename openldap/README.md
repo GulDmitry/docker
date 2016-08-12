@@ -1,6 +1,6 @@
 # OpenLDAP and phpLDAPAdmin.
 
-* [OpenLDAP box](https://github.com/osixia/docker-openldap).
+* [OpenLDAP box](https://github.com/Appdynamics/extensions-docker).
 * [phpLDAPAdmin box](https://github.com/osixia/docker-phpLDAPadmin).
 
 ## Getting Started
