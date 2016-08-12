@@ -24,7 +24,7 @@
 * Login(DN): `cn=admin,dc=openldap,dc=com`
 * Password: `admin`
 
-#### Creating a new user
+#### Creating a new user (IN PROGRESS)
 * (optional) Create a new group by clicking `Create new entry here`.
 * Generic: Posix Group, enter a new for instance `users`.
 * Create a child entry
@@ -35,3 +35,4 @@
 
 #TODO
 * User fixtures.
+* The `test` user cannot perform search.
