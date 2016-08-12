@@ -31,6 +31,7 @@
 * Log in the Admin tool.
 * Click `Import` button.
 * Select `users.ldif` file.
+* Test the group `docker exec -t openldap ldapsearch -x -h localhost -b ou=people,dc=openldap,dc=com -D "cn=admin,dc=openldap,dc=com" -w admin` 
 
 #### Creating a new user manually
 * Create a new organization `People` by clicking `Create new entry here` and selection `Organisational Unit`.
