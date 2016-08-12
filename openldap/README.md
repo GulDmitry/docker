@@ -27,15 +27,16 @@
 * Login(DN): `cn=admin,dc=openldap,dc=com`
 * Password: `admin`
 
-#### Creating a new user (IN PROGRESS)
-* (optional) Create a new group by clicking `Create new entry here`.
-* Generic: Posix Group, enter a new for instance `users`.
-* Create a child entry
-* Generic: User Account
-* User: test - test
-* New DN is `cn=test,cn=users,dc=openldap,dc=com`
-  * Test search `docker exec -t openldap ldapsearch -x -h localhost -b cn=test,cn=users,dc=openldap,dc=com -D "cn=test,cn=users,dc=openldap,dc=com" -w test`
+#### Importing demo users
+* Log in the Admin tool.
+* Click `Import` button.
+* Select `users.ldif` file.
+
+#### Creating a new user manually
+* Create a new organization `People` by clicking `Create new entry here` and selection `Organisational Unit`.
+* Create a child group `users` by clicking `Create a child entry` - `Posix Group`.
+* Create a child `User Account`: test - test.
+* The final DN should be `cn=test,ou=People,dc=openldap,dc=com`
+* Test `docker exec -t openldap ldapsearch -x -h localhost -b cn=test,ou=People,dc=openldap,dc=com -D "cn=test,ou=People,dc=openldap,dc=com" -w test`
 
 #TODO
-* User fixtures.
-* The `test` user cannot perform search.

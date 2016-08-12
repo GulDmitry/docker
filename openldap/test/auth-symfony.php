@@ -60,7 +60,7 @@ $authProvider = new LdapBindAuthenticationProvider(
     new UserChecker(),
     'ldap',
     $ldap,
-    'cn={username},cn=users,' . $baseDn, // Bind DN string. Users in the `users` group (see README.md).
+    'cn={username},ou=People,' . $baseDn, // Bind DN string. Users in the `users` group (see README.md).
     //'cn={username}' . $baseDn, // To log in as admin.
     false
 );
