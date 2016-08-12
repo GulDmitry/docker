@@ -1,4 +1,4 @@
-# OpenLDAP and phpLDAPAdmin.
+# Docker Compose OpenLDAP and phpLDAPAdmin.
 
 * [OpenLDAP box](https://github.com/Appdynamics/extensions-docker).
 * [phpLDAPAdmin box](https://github.com/osixia/docker-phpLDAPadmin).
@@ -15,6 +15,7 @@
   * `docker exec -t openldap ldapsearch -x -h localhost -b dc=openldap,dc=com -D "cn=admin,ou=admins,dc=openldap,dc=com" -w admin` - to search admin's data.
   The `openldap` name is defined in the compose file.
   * Make sure the result object does *not* look like `result: 32 No such object`.
+  * Anonymous search is **enabled**, i.e. `docker exec -t openldap ldapsearch -x -h localhost -b dc=openldap,dc=com`
 * PHP
   * `php test/connect-raw.php` - raw PHP.
   * `php test/connect-symfony.php` - Symfony. Run `php composer.phar install -d 'test'` first.
@@ -57,5 +58,8 @@
 ##### Groups
 * Base DN: `ou=groups,dc=openldap,dc=com`
 * Attributes: `dn, cn, member`
+
+### SugarCRM LDAP
+![sugarcrm-ldap-auth.png](assets/sugarcrm-ldap-auth.png)
 
 #TODO
