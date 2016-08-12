@@ -2,7 +2,7 @@
 $host = 'localhost';
 $port = 389; // See the docker-compose.yml
 
-$dn = 'cn=admin,dc=openldap,dc=com';
+$dn = 'cn=admin,ou=admins,dc=openldap,dc=com';
 $pass = 'admin';
 
 $connection = ldap_connect($host, $port);
@@ -32,17 +32,5 @@ $attributes = [
 $sr = ldap_search($connection, $dn, $filter, $attributes);
 
 $sResult = ldap_get_entries($connection, $sr);
-
-// TODO: Investigate why a user cannot be added. PHP Warning: ldap_add(): Add: Server is unwilling to perform in ...
-//$cn = 'User1';
-//$givenName = 'fname';
-//$surname = 'lname';
-//
-//$info["cn"] = $cn;
-//$info["givenName"] = $givenName;
-//$info["surname"] = $surname;
-//$info["objectClass"] = "inetOrgPerson";
-//
-//$r = ldap_add($connection, "cn=$cn,ou=Users,dc=tup,dc=com", $info);
 
 var_dump('Good!', $sResult);

@@ -8,7 +8,7 @@ $config = [
     'host' => 'localhost',
     'port' => 389,
 ];
-$dn = 'cn=admin,dc=openldap,dc=com';
+$dn = 'cn=admin,ou=admins,dc=openldap,dc=com';
 $password = 'admin';
 
 $adapter = new Adapter($config);

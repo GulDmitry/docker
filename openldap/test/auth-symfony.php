@@ -50,7 +50,7 @@ $ldap = new Ldap($adapter);
 
 // To use full DN string as a login, replace filter parameter.
 // Use `cn` as uidKey, default is Active Directory specific.
-$userProvider = new LdapUserProvider($ldap, $baseDn, 'cn=admin,' . $baseDn, 'admin', [], 'cn');
+$userProvider = new LdapUserProvider($ldap, $baseDn, 'cn=admin,ou=admins,' . $baseDn, 'admin', [], 'cn');
 
 // Without the search DN string provider cannot perform search.
 //$userProvider = new LdapUserProvider($ldap, 'dc=openldap,dc=com', null, null, [], 'cn');
@@ -60,8 +60,7 @@ $authProvider = new LdapBindAuthenticationProvider(
     new UserChecker(),
     'ldap',
     $ldap,
-    'cn={username},ou=People,' . $baseDn, // Bind DN string. Users in the `users` group (see README.md).
-    //'cn={username}' . $baseDn, // To log in as admin.
+    'cn={username},ou=People,' . $baseDn, // Bind DN string.
     false
 );
 
@@ -70,9 +69,7 @@ $authManager = new AuthenticationProviderManager([
 ]);
 
 // To use DN as login the provider should be tuned.
-//$unAuthToken = new UsernamePasswordToken('cn=admin,dc=openldap,dc=com', $password, 'ldap');
-//$unAuthToken = new UsernamePasswordToken('admin', 'admin', 'ldap');
-$unAuthToken = new UsernamePasswordToken('test', 'test', 'ldap');
+$unAuthToken = new UsernamePasswordToken('user1', 'user1', 'ldap');
 
 $token = $authManager->authenticate($unAuthToken);
 

@@ -1,17 +1,8 @@
 openldap:
-  image: osixia/openldap:1.1.5
+  build: images/openldap
   container_name: openldap
-  environment:
-    LDAP_ORGANISATION: "OpenLDAP"
-    LDAP_DOMAIN: "openldap.com"
-    LDAP_BASE_DN: "dc=openldap,dc=com"
-    LDAP_ADMIN_PASSWORD: "admin"
-  tty: true
-  stdin_open: true
   volumes:
-    - /var/lib/ldap
-    - /etc/ldap/slapd.d
-    - /container/service/slapd/assets/certs/
+    - ./images/openldap:/root
   ports:
     - "389:389"
     - "639:639"
