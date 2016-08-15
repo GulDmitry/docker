@@ -51,6 +51,8 @@ $ldap = new Ldap($adapter);
 // To use full DN string as a login, replace filter parameter.
 // Use `cn` as uidKey, default is Active Directory specific.
 $userProvider = new LdapUserProvider($ldap, $baseDn, 'cn=admin,ou=admins,' . $baseDn, 'admin', [], 'cn');
+// If anonymous search is enabled.
+//$userProvider = new LdapUserProvider($ldap, $baseDn, null, null, [], 'cn');
 
 // Without the search DN string provider cannot perform search.
 //$userProvider = new LdapUserProvider($ldap, 'dc=openldap,dc=com', null, null, [], 'cn');
