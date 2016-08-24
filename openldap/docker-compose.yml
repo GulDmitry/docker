@@ -1,20 +1,22 @@
-openldap:
-  build: images/openldap
-  container_name: openldap
-  volumes:
-    - ./images/openldap:/root
-  ports:
-    - "389:389"
-    - "639:639"
-  hostname: "openldap.com"
+version: '2'
+services:
+  openldap:
+    build: images/openldap
+    container_name: openldap
+    volumes:
+      - ./images/openldap:/root
+    ports:
+      - "389:389"
+      - "639:639"
+    hostname: "openldap.com"
 
-phpldapadmin:
-  image: osixia/phpldapadmin:0.6.10
-  container_name: phpldapadmin
-  environment:
-    PHPLDAPADMIN_LDAP_HOSTS: "openldap"
-    PHPLDAPADMIN_HTTPS=false:
-  ports:
-    - "8899:80"
-  links:
-    - openldap
+  phpldapadmin:
+    image: osixia/phpldapadmin:0.6.10
+    container_name: phpldapadmin
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: "openldap"
+      PHPLDAPADMIN_HTTPS=false:
+    ports:
+      - "8899:80"
+    depends_on:
+      - openldap

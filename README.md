@@ -1,6 +1,10 @@
 docker
 ======
 
+#### Requirements
+* docker-compose >= 1.6.1
+* docker >= 1.10.0
+
 To run a project go to <project>/src directory and run:
 
 `docker-compose up`
@@ -18,7 +22,7 @@ Tuned Ubuntu image:
 `sudo docker pull phusion/baseimage`
 
 Get containers IPs:
-`docker inspect -f "{{ .NetworkSettings.IPAddress }}" hash or service names`
+`docker inspect {hash or service names} | grep IPAddress`
 
 SSH instead of 22 port forwarding:
 `docker exec -it 580b9e371f71 bash`
@@ -33,6 +37,10 @@ Build and remove previous builds
 RM all <none> containers:
 `docker rmi -f $(docker images | grep "^<none>" | awk "{print $3}")f`
 
+Stop\rm all containers:
+`docker stop $(docker ps -a -q)`
+`docker rm $(docker ps -a -q)`
+
 To show all ENV variables run:
 `docker-compose run db env`
 , where the "db" is a docker-compose.yml service.
@@ -41,6 +49,13 @@ To run the same services with a specific project name (by default dir name):
 `docker-compose -f /var/www/docker/lamp/src/docker-compose.yml -p test up`
 
 `docker-compose run web db -d`
+
+To stop and remove containers with their networs:
+`docker-compose down`
+Or
+`docker-compose stop`
+`docker-compose rm -f`
+`docker-compose network rm {service_name}`
 
 Monitoring.
 http://www.weave.works/products/weave-scope/
