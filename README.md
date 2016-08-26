@@ -11,8 +11,8 @@ To run a project go to <project>/src directory and run:
 
 A folder <project>/ext contains extended images that require built base images,
 for example php `lamp/images/ext/php5.6-apache/Dockerfile` is based on `php:5.6-apache` base image (FROM clause).
-Because the image is placed in ofiicial hub it will be downloaded automatically, otherwise it should be build manually, for example:
-`docker build -t php-custom:5.6-apache --force-rm=true .`
+Because the image is placed in ofiicial hub it will be downloaded automatically, otherwise it should be build manually, for example:  
+`docker build -t php-custom:5.6-apache --force-rm=true .`  
 in a folder with `Dockerfile` inside.
 
 Docker is a daemon, make sure it's running:
@@ -30,17 +30,17 @@ Get containers IPs:
 
 Go to container's shell, or execute a command inside container:
 
-`docker exec -it 580b9e371f71 bash`
+`docker exec -it 580b9e371f71 bash`  
 `docker exec {container-name} php -v`
 
 Run in the background:
 
-`docker-compose up -d`
+`docker-compose up -d`  
 `docker-compose logs`
 
 List of containers:
 
-`docker ps`
+`docker ps`  
 `docker ps -a` - to see stopped containers.
 
 Build and remove previous builds
@@ -53,7 +53,7 @@ RM all <none> containers:
 
 Stop\rm all containers:
 
-`docker stop $(docker ps -a -q)`
+`docker stop $(docker ps -a -q)`  
 `docker rm $(docker ps -a -q)`
 
 To show all ENV variables run:
@@ -64,7 +64,7 @@ To show all ENV variables run:
 
 To run the same services with a specific project name (by default dir name):
 
-`docker-compose -f /var/www/docker/lamp/src/docker-compose.yml -p test up`
+`docker-compose -f /var/www/docker/lamp/src/docker-compose.yml -p test up`  
 `docker-compose run web db -d`
 
 To stop and remove containers with their networks:
@@ -72,8 +72,8 @@ To stop and remove containers with their networks:
 `docker-compose down`
 Or
 
-`docker-compose stop`
-`docker-compose rm -f`
+`docker-compose stop`  
+`docker-compose rm -f`  
 `docker-compose network rm {service_name}`
 
 [Monitoring](http://www.weave.works/products/weave-scope/).
