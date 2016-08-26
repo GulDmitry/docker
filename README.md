@@ -19,9 +19,11 @@ in the `lamp/images/base/php-<hash>/5.6/apache` directory.
 
 ## Tips
 Tuned Ubuntu image:
+
 `sudo docker pull phusion/baseimage`
 
 Get containers IPs:
+
 `docker inspect {hash or service names} | grep IPAddress`
 
 SSH instead of 22 port forwarding:
@@ -47,18 +49,16 @@ To show all ENV variables run:
 
 To run the same services with a specific project name (by default dir name):
 `docker-compose -f /var/www/docker/lamp/src/docker-compose.yml -p test up`
-
 `docker-compose run web db -d`
 
-To stop and remove containers with their networs:
+To stop and remove containers with their networks:
 `docker-compose down`
 Or
 `docker-compose stop`
 `docker-compose rm -f`
 `docker-compose network rm {service_name}`
 
-Monitoring.
-http://www.weave.works/products/weave-scope/
+[Monitoring](http://www.weave.works/products/weave-scope/).
 
 Inside a container if you get "Error opening terminal: unknown." error exec:
 `export TERM=xterm`
