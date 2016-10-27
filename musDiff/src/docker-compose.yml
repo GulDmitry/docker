@@ -1,8 +1,0 @@
-version: '2'
-services:
-  musdiff-web-php:
-    build: ../images/ext/php7.0-fpm
-    ports:
-      - "8000:80"
-    volumes:
-      - /var/www/musDiff:/var/www/html
