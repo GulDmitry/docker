@@ -1,0 +1,63 @@
+version: '2'
+services:
+  nginx:
+      image: nginx:1.11
+      ports:
+        - "8080:80"
+      volumes:
+#        - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+        - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+        - ./www:/var/www/html
+      depends_on:
+        - db
+        - php
+      networks:
+        base_net:
+
+  php:
+    build: ../images/ext/php7.0-fpm
+    ports:
+      - "9000"
+    volumes:
+      - ./www:/var/www/html
+    depends_on:
+      - db
+    networks:
+      base_net:
+        ipv4_address: 172.16.238.11
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./mysql/local.cnf:/etc/mysql/conf.d/local.cnf
+    ports:
+      - "3366:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+    networks:
+      base_net:
+        ipv4_address: 172.16.238.10
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8090:80"
+    environment:
+      PMA_ARBITRARY: 0
+      PMA_HOST: 172.16.238.10
+      PMA_USER: root
+      PMA_PASSWORD: root
+    depends_on:
+      - db
+    networks:
+      base_net:
+
+networks:
+  base_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24
+        gateway: 172.16.238.1
