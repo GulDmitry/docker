@@ -3,6 +3,7 @@ docker
 
 #### Requirements
 * [docker](https://docs.docker.com/) >= 1.10.0
+  * `wget -qO- https://get.docker.com/ | sh`
 * [docker-compose](https://docs.docker.com/compose/) >= 1.6.1
 
 To run a project go to <project>/src directory and run:
