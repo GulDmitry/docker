@@ -4,6 +4,7 @@ RUN a2enmod rewrite expires
 
 # Install modules
 RUN apt-get update && apt-get install -y \
+        git \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng12-dev \
@@ -38,6 +39,12 @@ RUN apt-get install -y libc-client-dev
 RUN apt-get install -y libkrb5-dev
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 RUN docker-php-ext-install imap
+
+# Install ldap
+#RUN apt-get install libldap2-dev -y && \
+#    rm -rf /var/lib/apt/lists/* && \
+#    docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
+#    docker-php-ext-install ldap
 
 # Install xhprof, xdebug
 RUN pecl install -o -f xhprof xdebug \

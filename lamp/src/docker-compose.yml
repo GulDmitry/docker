@@ -16,6 +16,8 @@ services:
   # To connect to the static DB IP.
     networks:
       base_net:
+#    extra_hosts:
+#     - "bitbucket.wrenkitchens.com:10.211.128.51"
 
   db:
     image: mysql:5.7
