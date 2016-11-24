@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
         php5-cli \
         php5-mysql \
         php5-curl \
-    && docker-php-ext-install iconv mysqli pdo pdo_mysql
+    && docker-php-ext-install iconv mysql mysqli pdo pdo_mysql
 
 # Install bcmath
 RUN docker-php-ext-install bcmath
