@@ -8,7 +8,7 @@ docker
 
 To run a project go to <project>/src directory and run:
 
-`docker-compose up`
+`docker-compose up` or `docker-compose up --build` to rebuild containers (docker caches layers).
 
 A folder <project>/ext contains extended images that require built base images,
 for example php `lamp/images/ext/php5.6-apache/Dockerfile` is based on `php:5.6-apache` base image (FROM clause).
