@@ -77,6 +77,13 @@ Or
 `docker-compose rm -f`  
 `docker-compose network rm {service_name}`
 
+Remove all containers:
+`docker rm `docker ps --no-trunc -aq``
+
+Run container:
+`docker run -it {container} /bin/bash`
+`docker-compose run {service} /bin/bash`
+
 [Monitoring](http://www.weave.works/products/weave-scope/).
 
 Inside a container if you get "Error opening terminal: unknown." error exec:
