@@ -48,6 +48,8 @@ Build and remove previous builds
 
 `docker build -t php:5.4-apache --force-rm=true .`
 
+[Docker-gc](https://github.com/spotify/docker-gc): `docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc:ro spotify/docker-gc`
+
 RM all <none> containers:
 
 `docker rmi -f $(docker images | grep "^<none>" | awk "{print $3}")f`
