@@ -21,4 +21,6 @@ if (!$mysqli->real_connect('172.16.238.10', 'root', 'root', 'testdb')) {
 var_dump('Db host info', $mysqli->host_info);
 $mysqli->close();
 
-phpinfo();
+//phpinfo();
+
+file_put_contents('test.txt', 'some content');
