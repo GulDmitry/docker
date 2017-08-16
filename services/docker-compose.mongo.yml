@@ -1,0 +1,15 @@
+# docker-compose -f docker-compose.yml -f ../services/docker-compose.mongo.yml up
+version: '3'
+services:
+  mongo:
+    image: mongo:3.4
+    container_name: base-mongo
+    ports:
+      - 27017:27017
+#    volumes:
+#      - /my/own/datadir:/data/db
+    depends_on:
+      - php
+    networks:
+      base_net:
+        ipv4_address: 172.16.238.3

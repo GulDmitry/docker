@@ -1,9 +1,9 @@
 version: '3'
 services:
-  web-php:
+  php:
 #    build: ./images/php5.6-apache
     build: ./images/php7.0-apache
-    container_name: base-web-php
+    container_name: base-php
     ports:
 # Own IP or from hosts.
 #      - 127.0.10.2:8080:80
@@ -46,6 +46,7 @@ services:
 # Or static IP if defined.
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: base-phpmyadmin
     ports:
       - 8090:80
     environment:
