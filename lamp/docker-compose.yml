@@ -1,0 +1,66 @@
+version: '3'
+services:
+  web-php:
+#    build: ./images/php5.6-apache
+    build: ./images/php7.0-apache
+    container_name: base-web-php
+    ports:
+# Own IP or from hosts.
+#      - 127.0.10.2:8080:80
+      - 8080:80
+    volumes:
+      - ./www:/var/www/html
+    depends_on:
+      - db
+# Might help to run the container as non-root when image's kernel will be 4.11+.
+#    sysctls:
+#      - net.ipv4.ip_unprivileged_port_start=0
+    networks:
+      base_net:
+#    extra_hosts:
+#      - "bitbucket.repo.com:10.211.128.51"
+
+  db:
+    image: mysql:5.7
+    container_name: base-mysql
+    volumes:
+      - ./images/mysql:/etc/mysql/conf.d/
+#      - /my/own/datadir:/var/lib/mysql
+    ports:
+# To connect locally: mysql --host=0.0.0.0 --port=3366 --user=root --password=root testdb
+      - 3366:3306
+#    expose: # Without publishing to the host machine - only be accessible to linked services.
+#      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+#      MYSQL_USER: test
+#      MYSQL_PASSWORD: test
+    networks:
+      base_net:
+        ipv4_address: 172.16.238.10
+
+# To connect from UI use the command:
+# docker-compose ps - get containers if container_name key is not specified.
+# docker inspect DB_CONTAINER_NAME | grep IPAddress - get the containers IP.
+# Or static IP if defined.
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8090:80
+    environment:
+#      - PMA_ARBITRARY=1
+      - PMA_ARBITRARY=0
+      - PMA_HOST=172.16.238.10
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    depends_on:
+      - db
+
+networks:
+  base_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.238.0/24

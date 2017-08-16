@@ -1,7 +1,14 @@
-FROM php:5.5-fpm
+FROM php:5.6-apache
+
+RUN a2enmod rewrite expires
+
+# TODO: replace with UID
+RUN usermod -u 1000 www-data
+RUN groupmod -g 1000 www-data
 
 # Install modules
 RUN apt-get update && apt-get install -y \
+        git \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng12-dev \
@@ -9,7 +16,7 @@ RUN apt-get update && apt-get install -y \
         php5-cli \
         php5-mysql \
         php5-curl \
-    && docker-php-ext-install iconv mysqli pdo pdo_mysql
+    && docker-php-ext-install iconv mysql mysqli pdo pdo_mysql
 
 # Install bcmath
 RUN docker-php-ext-install bcmath
@@ -36,6 +43,12 @@ RUN apt-get install -y libc-client-dev
 RUN apt-get install -y libkrb5-dev
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 RUN docker-php-ext-install imap
+
+# Install ldap
+#RUN apt-get install libldap2-dev -y && \
+#    rm -rf /var/lib/apt/lists/* && \
+#    docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
+#    docker-php-ext-install ldap
 
 # Install xhprof, xdebug
 RUN pecl install -o -f xhprof xdebug \
@@ -108,4 +121,4 @@ RUN echo " \
       date.timezone = Europe/Minsk\n\
 " > /usr/local/etc/php/conf.d/docker-local.ini
 
-CMD ["php-fpm"]
+CMD ["apache2-foreground"]

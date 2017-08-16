@@ -11,6 +11,13 @@
 
 var_dump(['xdebug', 'works']);
 
+$file = 'test.txt';
+file_put_contents($file, 'data');
+if (!file_exists($file)) {
+    var_dump('File cannot be created.');
+}
+unlink($file);
+
 $mysqli = mysqli_init();
 $mysqli->options(MYSQLI_INIT_COMMAND, 'SET AUTOCOMMIT = 0');
 $mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5);

@@ -1,37 +1,45 @@
-FROM php:5.6-apache
+FROM php:7.0-apache
 
 RUN a2enmod rewrite expires
 
+# TODO: replace with UID
+RUN usermod -u 1000 www-data
+RUN groupmod -g 1000 www-data
+
 # Install modules
 RUN apt-get update && apt-get install -y \
-        git \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
+        libmcrypt-dev \
         libpng12-dev \
-        php5-xdebug \
-        php5-cli \
-        php5-mysql \
-        php5-curl \
-    && docker-php-ext-install iconv mysql mysqli pdo pdo_mysql
+        git \
+        zlib1g-dev \
+        g++ \
+        libicu-dev
+
+# Install intl
+RUN docker-php-ext-configure intl
+RUN docker-php-ext-install intl
+
+# Install mysql
+RUN docker-php-ext-install iconv mysqli pdo pdo_mysql
 
 # Install bcmath
 RUN docker-php-ext-install bcmath
 
 # Install bz2
 RUN apt-get install -y libbz2-dev
-RUN docker-php-ext-install bz2 zip
+RUN docker-php-ext-install zip
 
 # Install GD
-RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng12-dev
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
-RUN docker-php-ext-install gd
+RUN docker-php-ext-install -j$(nproc) gd
 
 # Install mbstring
 RUN docker-php-ext-install mbstring
 
 # Install mcrypt
-RUN apt-get install -y libmcrypt-dev
-RUN docker-php-ext-install mcrypt
+RUN docker-php-ext-install -j$(nproc) iconv mcrypt
 
 # Install imap
 RUN apt-get install -y openssl
@@ -40,35 +48,31 @@ RUN apt-get install -y libkrb5-dev
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 RUN docker-php-ext-install imap
 
-# Install ldap
-#RUN apt-get install libldap2-dev -y && \
-#    rm -rf /var/lib/apt/lists/* && \
-#    docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
-#    docker-php-ext-install ldap
-
 # Install xhprof, xdebug
-RUN pecl install -o -f xhprof xdebug \
+RUN pecl install -o -f xdebug \
     && rm -rf /tmp/pear
 
-RUN docker-php-ext-enable xhprof
+#RUN docker-php-ext-enable xhprof
 RUN docker-php-ext-enable xdebug
 
 RUN echo " \
-    ; For debug in CLI run before script {export XDEBUG_CONFIG='idekey=netbeans-xdebug'}.\n\
+    ; For debug in CLI run before script `export XDEBUG_CONFIG='idekey=PHPSTORM'`.\n\
     ; PHP Storm IDE key is PHPSTORM\n\
     ; To run CLI debug via PHPStorm IDE setup a server (where host is private IP), match routes\n\
     ; and run {export PHP_IDE_CONFIG='serverName=vagrant'}\n\
     ; For debug service (SOAP, REST) set cookie on client setCookie('XDEBUG_SESSION', 'netbeans-xdebug')\n\
     ; then debug progect. Some times need restart apache and Netbeans.\n\
     ; Remote settings\n\
+    ; xdebug.remote_host=172.17.0.1\n\
+    ; xdebug.remote_host=172.16.238.11\n\
     \n\
-    xdebug.remote_autostart=off\n\
+    xdebug.remote_autostart=on\n\
     xdebug.remote_enable=on\n\
     xdebug.remote_handler=dbgp\n\
     xdebug.remote_mode=req\n\
-    xdebug.remote_host=172.17.42.1\n\
     xdebug.remote_port=9000\n\
-    xdebug.remote_connect_back = on\n\
+    ; if set the remote_host is ignored\n\
+    xdebug.remote_connect_back=on\n\
     xdebug.idekey=PHPSTORM\n\
     \n\
     ; General\n\
@@ -83,7 +87,7 @@ RUN echo " \
     xdebug.extended_info=1\n\
     xdebug.manual_url=http://www.php.net\n\
     xdebug.show_mem_delta=1\n\
-    xdebug.max_nesting_level=100\n\
+    xdebug.max_nesting_level=250\n\
     \n\
     ;var_dump\n\
     ;Default value: 128\n\
@@ -108,6 +112,7 @@ RUN echo " \
           " > /usr/local/etc/php/conf.d/docker-xdebug.ini
 
 RUN echo " \
+      short_open_tag = Off\n\
       post_max_size = 80M\n\
       upload_max_filesize = 80M\n\
       memory_limit = 800M\n\
