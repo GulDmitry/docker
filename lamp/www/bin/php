@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$DIR/../" # Force phpstorm to sit in project's root dir.
+docker run -i --rm --net=host --sig-proxy=true --pid=host \
+-v "${PWD}":"${PWD}" \
+-v /tmp/:/tmp/ \
+-v $HOME:$HOME \
+-w ${PWD} \
+--user ${UID}:${UID} \
+lamp_php php -d include_path=vendor/phpunit/phpunit "$@"
