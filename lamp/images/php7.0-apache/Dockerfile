@@ -60,7 +60,7 @@ RUN echo " \
     ; PHP Storm IDE key is PHPSTORM\n\
     ; To run CLI debug via PHPStorm IDE setup a server (where host is private IP), match routes\n\
     ; and run {export PHP_IDE_CONFIG='serverName=vagrant'}\n\
-    ; For debug service (SOAP, REST) set cookie on client setCookie('XDEBUG_SESSION', 'netbeans-xdebug')\n\
+    ; For debug service (SOAP, REST) set cookie on client setCookie('XDEBUG_SESSION', 'PHPSTORM');\n\
     ; then debug progect. Some times need restart apache and Netbeans.\n\
     ; Remote settings\n\
     ; xdebug.remote_host=172.17.0.1\n\
