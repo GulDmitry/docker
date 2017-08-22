@@ -34,6 +34,10 @@ Go to container's shell, or execute a command inside container:
 `docker exec -it 580b9e371f71 bash`  
 `docker exec {container-name} php -v`
 
+To exec a command as root for non-root service:
+
+`docker-compose exec -u root service_name bash`
+
 Run in the background:
 
 `docker-compose up -d`  
