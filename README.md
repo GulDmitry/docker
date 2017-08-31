@@ -29,6 +29,8 @@ Get containers IPs:
 
 `docker inspect {hash or service names} | grep IPAddress`
 
+Access to host `172.16.42.1` or `172.16.240.1` in case of `subnet: 172.16.240.0`.
+
 Go to container's shell, or execute a command inside container:
 
 `docker exec -it 580b9e371f71 bash`  
